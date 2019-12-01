@@ -1,0 +1,270 @@
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat';
+    }
+
+    body {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      border: 0;
+      overflow: hidden;
+    }
+
+    header {
+      position: absolute;
+      clear: both;
+      top: 0px;
+      left: 0px;
+      padding: 11px 10px;
+      width: 100%;
+      box-sizing: border-box;
+      border-bottom: 1px solid grey;
+    }
+
+    footer {
+      position: absolute;
+      clear: both;
+      bottom: 0px;
+      border: 0px;
+
+      padding: 11px 10px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    main {
+      /* position: absolute;
+      clear: both; */
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    a {
+      color: rgb(230, 230, 230);
+      text-decoration: none;
+    }
+
+    h1 {
+      color: white;
+    }
+
+    #canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    #rigthAside {
+      position: absolute;
+      right: 20px;
+      top: 70px;
+
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+
+    #leftAside {
+      position: absolute;
+      left: 10px;
+      top: 70px;
+
+      /* width: 400px; */
+
+
+      display:flex;
+      flex-direction: column;
+    }
+
+
+    .blackBox {
+      background-color: rgba( 70, 79, 89, 0.8);
+    }
+
+    .greyBox {
+      background-color: rgba(211,211,211,.6);
+      box-shadow: 1px 1px 5px grey;
+    }
+
+    .rotate{
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+    }
+
+    .numV {
+      margin: 25px auto;
+      padding: 2px;
+      width: 35px;
+    }
+
+    .containerV {
+      height: calc(calc(100% - 100px) * 0.95);
+      width: 100px;
+    }
+
+    nav.containerV ul {
+      margin:0px;
+      padding:0px;
+      list-style: none;
+    }
+
+    nav.containerV div.squareList{
+      padding-left:0px;
+      transition: max-height 0.2s ease-out;
+      max-height:0;
+      overflow:hidden;
+    }
+
+    nav.containerV li:hover div.squareList{
+      max-height:1000px;
+      transition: max-height 0.25s ease-in;
+    }
+
+    nav.containerV ul li {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+
+      /* border-radius: 6px; */
+      background-color: rgba(var(--rgb), 0.4);
+      box-shadow: 2px 2px 5px grey;
+    }
+
+    nav.containerV ul li:hover {
+      background-color: rgba(var(--rgb), 0.7);
+    }
+
+    nav.containerV ul li:nth-child(1){
+      --rgb: 211,211,211;
+    }
+    nav.containerV ul li:nth-child(2){
+      --rgb: 211,211,211;
+    }
+    nav.containerV ul li:nth-child(3){
+      --rgb: 211,211,211;
+    }
+
+
+    .squareList{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
+      grid-auto-rows: minmax(180px,1fr);
+      grid-gap: 5px;
+      justify-content: space-around;
+      align-content: start;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .module{
+      background: #eaeaea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      justify-self: center;
+      height:150px;
+      width: 150px;
+      position: relative;
+      top: 20px;
+      padding: 0px;
+      margin: 0px;
+      transition: transform .2s;
+    }
+
+    .module:hover {
+      transform: scale(1.2);
+    }
+
+
+    #mainList {
+      width: 20vw;
+    }
+
+
+    .textV{
+      padding: 5px;
+      box-sizing: border-box;
+      height: 50px;
+    }
+
+    .textV p:first-child{
+      position: relative;
+      top:0px;
+      left:-7px;
+    }
+
+    .textV p:nth-child(2){
+      position: relative;
+      top:-25px;
+      left:40px;
+    }
+
+
+    .slidersV {
+      padding: 5px;
+      height: 80%;
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    .numbersV{
+      display: flex;
+    }
+
+
+    /* The slider itself */
+    .slider {
+      -webkit-appearance: none;  /* Override default CSS styles */
+      appearance: none;
+      width: 100%; /* Full-width */
+      height: 25px; /* Specified height */
+      background: rgb( 86, 101, 115 ); /* Grey background */
+      outline: none; /* Remove outline */
+      opacity: 0.6; /* Set transparency (for mouse-over effects on hover) */
+      -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+      transition: opacity .2s;
+
+    }
+    /* Mouse-over effects */
+    .slider:hover {
+      opacity: 1; /* Fully shown on mouse-over */
+    }
+
+    /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none; /* Override default look */
+      appearance: none;
+      width: 25px; /* Set a specific slider handle width */
+      height: 25px; /* Slider handle height */
+      background: rgb(  171, 178, 185  ); /* Green background */
+      cursor: pointer; /* Cursor on hover */
+    }
+
+    .slider::-moz-range-thumb {
+      width: 25px; /* Set a specific slider handle width */
+      height: 25px; /* Slider handle height */
+      background: rgb(  171, 178, 185  ); /* Green background */
+      cursor: pointer; /* Cursor on hover */
+    }
+
+    .sliderVertical {
+      appearance: slider-vertical;
+      -webkit-appearance: slider-vertical; /* WebKit */
+      width: 25px; /* Full-width */
+      height: 100%; /* Specified height */
+    }
+
+    .footer-copyright{
+      color: rgb(148, 159, 170);
+    }
+
+    .text-center{
+      text-align: center;
+    }

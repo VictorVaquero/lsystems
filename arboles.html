@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>L-Systems</title>
+
+<link href="arboles.css" rel="stylesheet" type="text/css" media="all">
+
+
+<!--**********************************************
+      SCRIPTS BIBLIOTECAS DE AYUDA PARA ROTACIONES 3D
+    ***********************************************  -->
+<script type="text/javascript" src="./js/gl-matrix-min.js"></script>
+
+<script type="text/javascript" src="./js/constantes.js"></script>
+<script type="text/javascript" src="./js/eventos.js"></script>
+<script type="text/javascript" src="./js/fractal.js"></script>
+<script type="text/javascript" src="./js/objects3D.js"></script>
+<script type="text/javascript" src="./js/prisma.js"></script>
+<script type="text/javascript" src="./js/webgl.js"></script>
+<script type="text/javascript" src="./js/auxiliares.js"></script>
+
+
+
+<!-- ****************   VERTEX SHADER *******************-->
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+  // Atributos basicos
+  attribute vec3 aVertexPosition;
+  attribute vec4 aVertexColor;
+
+  // Atributos de segmento
+  attribute vec3 aSegmentPoint;
+  attribute vec3 aSegmentRotate;
+  attribute vec3 aSegmentScale;
+
+  // Color de salida
+  varying highp vec4 vColor;
+
+  //Matriz de trasnformación
+  uniform mat4 uMvMatrix;
+  uniform mat4 uSMatrix;
+  uniform mat4 uCMatrix;
+  uniform mat4 uPMatrix;
+
+  mat4 rotate(in vec3 axis, in float angle){
+    axis = normalize(axis);
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 1.0 - c;
+    return mat4(
+      oc *axis.x+c,  -axis.z*s,     -axis.y*s,     0.0,
+      axis.z*s,      oc*axis.y +c, -axis.x*s,     0.0,
+      axis.y*s,      axis.x*s,    oc*axis.z+c,  0.0,
+      0.0, 0.0, 0.0, 1.0);
+}
+
+  mat4 rotate(in vec3 angles){
+    return rotate(vec3(1,0,0),angles.x)*rotate(vec3(0,1,0),angles.y)*rotate(vec3(0,0,1),-angles.z);
+  }
+
+  mat4 scale(in vec3 sca) {
+	return mat4(	sca.x,		0,			   0,			     0,
+			 		      0, 	      sca.y,	   0,		       0,
+					      0, 	      0,	       sca.z,		   0,
+					      0, 			  0,			   0, 		     1);
+  }
+
+  void main() {
+    //AHORA transformo las coordenadas
+     gl_Position= vec4(aSegmentPoint,0.0)+rotate(aSegmentRotate)*scale(aSegmentScale)*vec4(aVertexPosition,1.0);
+     gl_Position= uPMatrix*uCMatrix*uMvMatrix*uSMatrix*gl_Position;
+     //gl_Position= vec4(aVertexPosition,1.0);
+     gl_PointSize=10.0; //TAMAÑO DEL PUNTO
+
+     vColor= aVertexColor;
+
+}
+</script>
+
+<!-- **************   VERTEX SHADER LEAVES******************* -->
+<script id="vertex-shader-leaves" type="x-shader/x-vertex">
+  // Atributos basicos
+  attribute vec3 aVertexPosition;
+  attribute vec4 aVertexColorL;
+
+  // Color de salida
+  varying highp vec4 vColor;
+
+  //Matriz de trasnformación
+  uniform mat4 uMvMatrix;
+  uniform mat4 uSMatrix;
+  uniform mat4 uCMatrix;
+  uniform mat4 uPMatrix;
+
+  void main() {
+
+    //AHORA transformo las coordenada
+     gl_Position= uPMatrix*uCMatrix*uMvMatrix*uSMatrix*vec4(aVertexPosition,1.0);
+     //gl_Position= vec4(aVertexPosition,1.0);
+     gl_PointSize=10.0; //TAMAÑO DEL PUNTO
+
+     vColor= aVertexColorL;
+
+}
+</script>
+
+<!-- ****************   FRAGMENT SHADER *******************-->
+<script id="fragment-shader" type="x-shader/x-fragment">
+//uniform vec4 uColor;
+varying  highp vec4 vColor;
+void main() {
+  //Color rojo
+   gl_FragColor = vColor;
+}
+</script>
+
+
+<!-- ****************                    *******************-->
+<!-- ****************        HTML        *******************-->
+<!-- ****************                    *******************-->
+
+</head>
+<body onload="initWebGL()">
+    <header class="blackBox">
+      <h1 class="text-center">Lindenmayer's L-System </h1>
+    </header>
+    <main>
+      <canvas id="canvas" width="3840px" height="1600px"></canvas>
+    </main>
+
+    <nav class="containerV" id="leftAside">
+      <ul id="mainList">
+        <li><p class="text-center">Trees</p>
+            <div class="squareList">
+              <div class="module" id="tree1">Tree 1</div>
+              <div class="module" id="tree2">Tree 2</div>
+              <div class="module" id="tree3">Tree 3</div>
+              <div class="module" id="tree4">Tree 4</div>
+            </div>
+        </li>
+        <li><p class="text-center">Leaves</p>
+            <div class="squareList">
+              <div class="module" id="leaf1">Leaf 1</div>
+              <div class="module" id="leaf2">Leaf 2</div>
+
+            </div>
+        </li>
+        <li><p class="text-center">Flowers</p>
+          <div class="squareList">
+            <div class="module" id="flower1">Flower 1</div>
+            <div class="module" id="flower2">Flower 2</div>
+            <div class="module" id="flower3">Flower 3</div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+
+    <aside class="containerV greyBox" id="rigthAside">
+      <div  class="textV">
+          <p class="rotate">Seed</p>
+          <p class="rotate">Gen.</p>
+      </div>
+      <div  class="slidersV">
+          <input type="range" min="0" max="25" value="12" class="slider sliderVertical" id="seed" orient="vertical">
+          <input type="range" min="1" max="10" value="5" class="slider sliderVertical" id="gen" orient="vertical">
+      </div>
+      <div class="numbersV">
+        <p class="numV text-center greyBox" id="seedN">12</p>
+        <p class="numV text-center greyBox" id="genN">3</p>
+      </div>
+    </aside>
+
+    <footer class="blackBox">
+      <div class="footer-copyright text-center">© 2019 Víctor Vaquero Martínez All Rights Reserved:
+        <a href="https://github.com/VictorVaquero">GitHub</a>
+      </div>
+    </footer>
+
+
+</body>
+</html>
