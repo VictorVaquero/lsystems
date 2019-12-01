@@ -69,7 +69,7 @@
   void main() {
     //AHORA transformo las coordenadas
      gl_Position= vec4(aSegmentPoint,0.0)+rotate(aSegmentRotate)*scale(aSegmentScale)*vec4(aVertexPosition,1.0);
-     gl_Position= uPMatrix*uCMatrix*uMvMatrix*uSMatrix*gl_Position;
+     gl_Position= uPMatrix*uCMatrix*uSMatrix*uMvMatrix*gl_Position;
      //gl_Position= vec4(aVertexPosition,1.0);
      gl_PointSize=10.0; //TAMAÑO DEL PUNTO
 
@@ -96,7 +96,7 @@
   void main() {
 
     //AHORA transformo las coordenada
-     gl_Position= uPMatrix*uCMatrix*uMvMatrix*uSMatrix*vec4(aVertexPosition,1.0);
+     gl_Position= uPMatrix*uCMatrix*uSMatrix*uMvMatrix*vec4(aVertexPosition,1.0);
      //gl_Position= vec4(aVertexPosition,1.0);
      gl_PointSize=10.0; //TAMAÑO DEL PUNTO
 

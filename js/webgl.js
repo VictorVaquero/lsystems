@@ -95,7 +95,7 @@ function reshapeMatrix(canvas){
   var idMatrix = mat4.create();
   var v = vec3.create();
 
-  vec3.set(v, 1920/canvas.width, 800/canvas.height, 1);
+  vec3.set(v, 2000/canvas.width, 2000/canvas.height, 1);
   mat4.fromScaling(idMatrix, v);
   mat4.multiply(SMatrix, idMatrix, SMatrix);
 }
