@@ -1,7 +1,7 @@
     * {
       margin: 0;
       padding: 0;
-      font-family: 'Montserrat';
+      font-family: 'Fira sans', sans-serif;
     }
 
     body {
@@ -17,7 +17,7 @@
       clear: both;
       top: 0px;
       left: 0px;
-      padding: 11px 10px;
+      padding: 6px 10px;
       width: 100%;
       box-sizing: border-box;
       border-bottom: 1px solid grey;
@@ -29,9 +29,13 @@
       bottom: 0px;
       border: 0px;
 
-      padding: 11px 10px;
+      padding: 4px 10px;
       width: 100%;
       box-sizing: border-box;
+    }
+
+    footer p {
+      font-size: clamp(0.6rem, 0.3072rem + 1.3196vw, 1rem);
     }
 
     main {
@@ -98,13 +102,14 @@
     }
 
     .numV {
-      margin: 25px auto;
+      margin: auto auto;
       padding: 2px;
       width: 35px;
+      font-size: clamp(0.8rem, 0.6536rem + 0.6598vw, 1rem);
     }
 
     .containerV {
-      height: calc(calc(100% - 100px) * 0.95);
+      height: calc(calc(100vh - 110px) * 0.95);
       width: 100px;
     }
 
@@ -112,6 +117,7 @@
       margin:0px;
       padding:0px;
       list-style: none;
+      font-size: clamp(0.8rem, 0.6536rem + 0.6598vw, 1rem);
     }
 
     nav.containerV div.squareList{
@@ -189,15 +195,14 @@
 
 
     .textV{
-      padding: 5px;
       box-sizing: border-box;
       height: 50px;
+      font-size: clamp(0.8rem, 0.6536rem + 0.6598vw, 1rem);
     }
 
     .textV p:first-child{
       position: relative;
       top:0px;
-      left:-7px;
     }
 
     .textV p:nth-child(2){
@@ -208,14 +213,15 @@
 
 
     .slidersV {
-      padding: 5px;
-      height: 80%;
+      padding: 10px 0px;
       display: flex;
+      flex-grow: 2;
       justify-content: space-evenly;
     }
 
     .numbersV{
       display: flex;
+      padding: 5px 0;
     }
 
 
@@ -267,4 +273,8 @@
 
     .text-center{
       text-align: center;
+    }
+
+    .text-white {
+      color: white;
     }

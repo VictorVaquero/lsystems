@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>L-Systems</title>
 
+<link href="normalize.css" rel="stylesheet" type="text/css" media="all">
 <link href="arboles.css" rel="stylesheet" type="text/css" media="all">
 
 
@@ -123,7 +124,7 @@ void main() {
 </head>
 <body onload="initWebGL()">
     <header class="blackBox">
-      <h1 class="text-center">Lindenmayer's L-System </h1>
+      <h2 class="text-center text-white">Lindenmayer's L-System </h2>
     </header>
     <main>
       <canvas id="canvas" width="3840px" height="1600px"></canvas>
@@ -143,7 +144,6 @@ void main() {
             <div class="squareList">
               <div class="module" id="leaf1">Leaf 1</div>
               <div class="module" id="leaf2">Leaf 2</div>
-
             </div>
         </li>
         <li><p class="text-center">Flowers</p>
@@ -163,8 +163,10 @@ void main() {
           <p class="rotate">Gen.</p>
       </div>
       <div  class="slidersV">
+        <div>
           <input type="range" min="0" max="25" value="12" class="slider sliderVertical" id="seed" orient="vertical">
           <input type="range" min="1" max="10" value="5" class="slider sliderVertical" id="gen" orient="vertical">
+        </div>
       </div>
       <div class="numbersV">
         <p class="numV text-center greyBox" id="seedN">12</p>
@@ -173,8 +175,10 @@ void main() {
     </aside>
 
     <footer class="blackBox">
-      <div class="footer-copyright text-center">© 2019 Víctor Vaquero Martínez All Rights Reserved:
-        <a href="https://github.com/VictorVaquero">GitHub</a>
+      <div class="footer-copyright text-center">
+        <p>© 2019 Víctor Vaquero Martínez All Rights Reserved:
+            <a href="https://github.com/VictorVaquero">GitHub</a>
+        </p>
       </div>
     </footer>
 

@@ -425,8 +425,22 @@ function drawScene() {
 }
 
 
-function animacion() {
-  setupDynamicBuffers();
-  drawScene();
-  requestAnimationFrame(animacion);
+// TODO: Move to globals
+var updateId,
+    previousDelta = 0,
+    fpsLimit = 30;
+
+function animacion(currentDelta) {
+    updateId = requestAnimationFrame(animacion);
+
+    var delta = currentDelta - previousDelta;
+
+    if (fpsLimit && delta < 1000 / fpsLimit - 0.01) {
+        return;
+    }
+
+    setupDynamicBuffers();
+    drawScene();
+
+    previousDelta = currentDelta;
 }
